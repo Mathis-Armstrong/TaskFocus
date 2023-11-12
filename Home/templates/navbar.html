@@ -1,0 +1,8 @@
+{% load static %}
+<nav>
+    <ul>
+        <li><a href= "{% url 'Home' %}" title="Home"><img src="{% static 'images/home.svg' %}" class="navbutton"></a></li>
+        <li><a href= "{% url 'Tasks' %}" title="Tasks"><img src="{% static 'images/tasks.png' %}" class="navbutton"></a></li>
+        <li><a href= "{% url 'login' %}" title="Login"><img src="{% static 'images/profile.png' %}" class="navbutton"></a></li>
+    </ul>
+</nav>

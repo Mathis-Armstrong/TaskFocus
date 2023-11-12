@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  {% include "header.html" %}
+  {% include "navbar.html" %}
+  <body>
+    <main>
+      <br>
+      <div>
+        {% if user.is_authenticated %}
+        <button type="button" onclick="newtask()" class="button">Create New Task</button>
+        <form id="newtask" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" form="newtask" class="button">Submit</button>
+        </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="link">You must be logged in to create tasks.</a>
+        {% endif %}
+    </div>
+    <br>
+    <div class="content">
+    {% for task in request.user.tasks.all %}
+      <div class="box">
+        {{ task.title }}
+        <br>
+        {{ task.description }}
+        <br>
+        {{ task.due }}
+        <img src="{% static 'images/edit.png' %}" class="taskbuttons">
+        <a href="{% url 'delete' task.id %}"><img src="{% static 'images/complete.svg' %}" class="taskbuttons"></a>
+        <a href="{% url 'delete' task.id %}"><img src="{% static 'images/delete.png' %}" class="taskbuttons"></a>
+      </div>
+      <br>
+    {% endfor %}
+    </div>
+    </main>
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>

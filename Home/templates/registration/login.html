@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  {% include "header.html" %}
+  {% include "navbar.html" %}
+  <body>
+    <main>
+      {% if user.is_authenticated %}
+        <h1 class="logmessage">You are logged in as: {{ user }}</h1>
+        <a href="{% url 'logout' %}" class="link">Logout</a>
+      {% else %}
+        <h1 class="logmessage">Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Login">
+        </form>
+        <br>
+        <a href="{% url 'Register' %}" class="link">Or register a new account.</a>
+      {% endif %}
+    </main>
+  </body>
+</html>

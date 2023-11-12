@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  {% include "header.html" %}
+  {% include "navbar.html" %}
+  <body>
+    <main>
+      <div>
+        {% if user.is_authenticated %}
+            <h1 class="logmessage">Hello {{ user }}</h1>
+            <br>
+            {% if request.user.tasks.all %}
+              <h1 class="message">Upcoming Tasks:</h1>
+              <div class="alertbox">
+                {% for task in request.user.tasks.all|slice:"0:3" %}
+                    <div class="alert">
+                      {{ task.title }}
+                      <br>
+                      {{ task.due }}
+                    </div>
+                    {% if not forloop.last %}
+                      <br>
+                    {% endif %}
+                {% endfor %}
+              </div>
+            {% else %}
+              <h1 class="message">You don't have any tasks.</h1>
+              <a href="{% url 'Tasks' %}" class="link">Create some here.</a>
+            {% endif %}
+        {% else %}
+            <h1 class="logmessage">You are not logged in.</h1>
+            <a href="{% url 'login' %}" class="link">Login</a>
+        {% endif %}
+    </div>  
+    </main>
+  </body>
+</html>
