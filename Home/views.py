@@ -36,6 +36,9 @@ class RegisterView(FormView):
             login(request, user)
         return redirect("Home")
 
+class MusicView(TemplateView):
+    template_name = "music.html"
+
 def delete(request, id):
   task = Task.objects.get(id=id)
   task.delete()

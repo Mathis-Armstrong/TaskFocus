@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+  </head>
+  {% include "header.html" %}
+  {% include "navbar.html" %}
+  <body>
+    <main>
+        <h1 class="message">Listen to some background music to stay focused:</h1>
+        <iframe width="750" height="417" src="https://www.youtube.com/embed/jfKfPfyJRdk?si=q0PTKE3EKyIxN3Ob" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </main>
+  </body>
+</html>

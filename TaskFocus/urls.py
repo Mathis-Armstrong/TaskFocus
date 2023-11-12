@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from Home.views import HomeView, RegisterView, TasksView, delete
+from Home.views import HomeView, MusicView, RegisterView, TasksView, delete
 
 
 urlpatterns = [
@@ -26,4 +26,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name="Register"),
     path('accounts/', include("django.contrib.auth.urls"), name="Accounts"),
     path('delete/<int:id>', delete, name='delete'),
+    path('music/', MusicView.as_view(), name="Music")
     ]
